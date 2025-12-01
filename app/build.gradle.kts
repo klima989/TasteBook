@@ -1,4 +1,5 @@
 import com.android.build.api.dsl.Packaging
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
@@ -8,6 +9,15 @@ plugins {
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.ksp)
     id("kotlin-kapt")
+}
+
+// Load local.properties
+val localProps = Properties()
+val localPropsFile = rootProject.file("local.properties")
+if (localPropsFile.exists()) {
+    localPropsFile.inputStream().use { stream ->
+        localProps.load(stream)
+    }
 }
 
 android {
@@ -22,6 +32,10 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // Pass CLIENT_ID from environment variable or Gradle property
+        val clientId = project.findProperty("CLIENT_ID") as String? ?: {localProps.getProperty("CLIENT_ID") ?: ""}
+        buildConfigField("String", "CLIENT_ID", "\"$clientId\"")
     }
 
     hilt {
@@ -44,7 +58,9 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
     buildFeatures {
+        buildConfig = true
         compose = true
     }
 

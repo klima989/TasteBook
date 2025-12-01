@@ -77,7 +77,7 @@ fun EditRecipeScreen(
             ) {
                 Button(onClick = {
                     if (selectedCategory != null && title.isNotBlank()) {
-                        val updatedRecipe = recipe?.copy(
+                        val newOrUpdatedRecipe = recipe?.copy(
                             title = title,
                             ingredients = ingredients.split(",").map { it.trim() },
                             steps = steps.split(",").map { it.trim() },
@@ -85,11 +85,18 @@ fun EditRecipeScreen(
                             tags = tags.split(",").map { it.trim() }.filter { it.isNotBlank() },
                             subCategory = subCategory,
                             category = selectedCategory!!
+                        ) ?: Recipe(
+                            title = title,
+                            ingredients = ingredients.split(",").map { it.trim() },
+                            steps = steps.split(",").map { it.trim() },
+                            image = imageUrl,
+                            tags = tags.split(",").map { it.trim() }.filter { it.isNotBlank() },
+                            subCategory = subCategory,
+                            category = selectedCategory!!,
+                            url = ""
                         )
-                        if (updatedRecipe != null) {
-                            viewModel.saveRecipe(updatedRecipe)
-                            onRecipeSaved(updatedRecipe)
-                        }
+                        viewModel.saveRecipe(newOrUpdatedRecipe)
+                        onRecipeSaved(newOrUpdatedRecipe)
                     } else {
                         showError = true
                     }

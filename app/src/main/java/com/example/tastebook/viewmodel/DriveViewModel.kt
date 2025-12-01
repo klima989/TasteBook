@@ -13,10 +13,10 @@ import androidx.credentials.GetCredentialResponse
 import androidx.datastore.preferences.core.edit
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.tastebook.BuildConfig
 import com.example.tastebook.DataStoreKeys.ACCESS_TOKEN
 import com.example.tastebook.DataStoreKeys.IS_SIGNED_IN
 import com.example.tastebook.DataStoreKeys.USER_EMAIL
-import com.example.tastebook.R
 import com.example.tastebook.data.Recipe
 import com.example.tastebook.data.RecipeDao
 import com.example.tastebook.dataStore
@@ -70,14 +70,15 @@ class DriveViewModel @Inject constructor(
     private val _userEmail = MutableStateFlow<String?>(null)
     val userEmail: StateFlow<String?> = _userEmail
 
-    private val WEB_CLIENT_ID by lazy {
-        // Load your credentials JSON from res/raw/credentials.json
-        app.resources.openRawResource(R.raw.web_credentials).bufferedReader().use {
-            val json = it.readText()
-            val obj = JSONObject(json)
-            obj.getJSONObject("web").getString("client_id")
-        }
-    }
+    private val WEB_CLIENT_ID: String = BuildConfig.CLIENT_ID
+
+//    private val WEB_CLIENT_ID by lazy {
+//        app.resources.openRawResource(R.raw.web_credentials).bufferedReader().use {
+//            val json = it.readText()
+//            val obj = JSONObject(json)
+//            obj.getJSONObject("web").getString("client_id")
+//        }
+//    }
 
     init {
         viewModelScope.launch {
