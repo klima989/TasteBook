@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Taste Book</string>
+
+    <string name="tab_sweet">Sweet</string>
+    <string name="tab_savory">Savory</string>
+
+    <string name="save_recipe">Save Recipe</string>
+    <string name="title">Title</string>
+    <string name="image_url">Image URL</string>
+    <string name="category">Category</string>
+    <string name="ingredients">Ingredients (comma separated)</string>
+    <string name="steps">Steps (comma separated)</string>
+    <string name="tags">Tags (comma separated, optional)</string>
+    <string name="subcategory">Subcategory (optional)</string>
+    <string name="cancel">Cancel</string>
+    <string name="error">Error</string>
+    <string name="category_error">Please fill the title and select a category</string>
+    <string name="category_error_saving">Please select a category before saving</string>
+    <string name="hint_subcategory">e.g. Cookies, Pasta</string>
+    <string name="hint_tags">e.g. dessert, quick, healthy</string>
+    <string name="recipe_details">Recipe Details</string>
+    <string name="edit_recipe">Edit Recipe</string>
+    <string name="add_recipe">Add Recipe</string>
+    <string name="ok">ok</string>
+    <string name="search_filter">Filter Recipes</string>
+    <string name="search_dialog_message">Advanced search by name, tag, or subcategory</string>
+    <string name="search">Search</string>
+</resources>
